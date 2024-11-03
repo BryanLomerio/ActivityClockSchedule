@@ -100,20 +100,22 @@ function calculateLinePosition(hour: number) {
   const y1 = 49 + 52 * Math.sin((angle * Math.PI) / 180); 
 
   const lineLength = 20; 
-  const lineOffset = lineLength / 2; 
-  const x2 = 51 + (50 + lineOffset) * Math.cos((angle * Math.PI) / 180);
-  const y2 = 50 + (50 + lineOffset) * Math.sin((angle * Math.PI) / 180);
+  /* const lineOffset = lineLength / 2;  */
+  // Remove x2 and y2 since they are not used
+  // const x2 = 51 + (50 + lineOffset) * Math.cos((angle * Math.PI) / 180);
+  // const y2 = 50 + (50 + lineOffset) * Math.sin((angle * Math.PI) / 180);
 
   return {
-    position: 'absolute' as const,
+    position: 'absolute' as 'absolute',
     left: `${x1}%`,
     top: `${y1}%`,
     width: '2px',
     height: `${lineLength}px`,
     backgroundColor: '#333',
     transform: `rotate(${angle + 90}deg)`,
-  } as React.CSSProperties; 
+  };
 }
+
 
 function calculatePosition(time: string) {
   const [hourString, minuteString] = time.split(":");
