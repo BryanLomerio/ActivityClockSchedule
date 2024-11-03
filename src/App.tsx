@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
+import Dog from './assets/dog.gif';
 import './index.css';
 
 interface ScheduleItem {
@@ -16,7 +17,7 @@ const scheduleData: ScheduleItem[] = [
   { startTime: "15:00 PM", endTime: "17:00 PM", activity: "LeetCode" },
   { startTime: "17:00 PM", endTime: "18:00 PM", activity: "Virtual Field Trip" },
   { startTime: "19:00 PM", activity: "Continue Studying TypeScript" },
-  { startTime: "23:00 PM", endTime: "06:00 AM", activity: "Sleep" },
+  { startTime: "23:00 PM", endTime: "06:00 AM", activity: "sleep" },
 ];
 
 const ClockSchedule: React.FC = () => {
@@ -61,7 +62,10 @@ const ClockSchedule: React.FC = () => {
                 className="clock-activity"
                 style={startPosition}
               >
-                <span className="activity-label">{item.activity}</span>
+                  <span className="activity-label">
+                  {item.activity === "sleep" ? <img src={Dog} alt="Dog sleeping" /> : item.activity}
+                </span>
+
               </div>
             );
           })}
@@ -137,48 +141,86 @@ function calculatePosition(time: string) {
   } as React.CSSProperties; 
 }
 
-function calculateHourHand(time: DateTime) {
-  const hours = time.hour; 
-  const minutes = time.minute; 
-  const angle = (hours * 15) + (minutes * 0.25) - 360; 
+function calculateHourHand(time:DateTime) {
 
-  return {
-    transform: `rotate(${angle}deg)`,
-    position: 'absolute',
-    bottom: '50%',
-    left: '50%',
-    transformOrigin: 'bottom center',
-  } as React.CSSProperties; 
+  const hours = time.hour;
+  const minutes = time.minute;
+  const angle = (hours * 15) + (minutes * 0.25) - 360;
+
+return {
+  transform: `rotate(${angle}deg)`,
+  position: 'absolute',
+  left: '50%',
+  transFormOrigin: 'bottom center'
+
+}as React.CSSProperties;
+
 }
 
-function calculateMinuteHand(time: DateTime) {
-  const minutes = time.minute; 
-  const seconds = time.second; 
-  const angle = (minutes * 6) + (seconds * 0.1) - 360;
 
-  return {
-    transform: `rotate(${angle}deg)`,
-    position: 'absolute',
-    bottom: '50%',
-    left: '50%',
-    transformOrigin: 'bottom center',
-  } as React.CSSProperties; 
-}
-
-function calculateSecondHand(time: DateTime) {
+function calculateMinuteHand(time: DateTime){
+  const minutes = time.minute;
   const seconds = time.second;
-  const angle = seconds * 6; 
-  
-  return {
-    transform: `rotate(${angle}deg)`,
-    position: 'absolute', 
-    bottom: '50%', 
-    left: '50%',
-    height: '40%',
-    width: '2px',  
-    backgroundColor: 'red', 
-    transformOrigin: 'bottom center',
-  } as React.CSSProperties; 
+const angle = (minutes * 6) + (seconds * 0.1) - 360;
+
+
+return{
+  transform: `rotate(${angle}deg)`,
+  position: `absolute`,
+  bottom: '50%',
+  left: '50%',
+  transformOrigin: 'bottom center'
+}as React.CSSProperties;
+}
+
+function calculateSecondHand(time: DateTime){
+
+  const seconds = time.second;
+const angle = seconds * 6;
+
+return{
+  transform: `rotate(${angle}deg)`,
+  position: `absolute`,
+  bottom: '50%',
+  left: '50%',
+  height:'50%',
+  width: '5px',
+  transformOrigin: 'bottom center'
+}as React.CSSProperties;
+
 }
 
 export default ClockSchedule;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
