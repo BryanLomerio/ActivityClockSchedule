@@ -1,0 +1,94 @@
+*{
+  font-family: "Barlow", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+.clock-schedule {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 1000px;
+}
+
+.clock-face {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  border: 5px solid #333;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.clock-hour {
+  position: absolute;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333; 
+}
+
+.clock-minute-marker {
+  position: absolute;
+}
+
+.clock-activity {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+}
+
+.activity-label {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.clock-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  background-color: #333;
+  border-radius: 5px;
+  transform-origin: bottom center;
+}
+
+.hour-hand {
+  width: 10px;
+  height: 250px;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+.minute-hand {
+  width: 10px;
+  height: 350px;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%); 
+}
+.current-time {
+  margin-top: 80px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+.second-hand {
+  width: 2px; 
+  height: 60%; 
+  background-color: red; 
+  position: absolute;
+  bottom: 50%;
+  left: 50%; 
+  transform-origin: bottom center;
+}
+
+
