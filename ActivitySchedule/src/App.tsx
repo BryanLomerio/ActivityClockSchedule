@@ -3,20 +3,20 @@ import { DateTime } from 'luxon';
 import './index.css';
 
 interface ScheduleItem {
-  time: string; 
+  startTime: string; 
+  endTime?: string; 
   activity: string; 
 }
 
 const scheduleData: ScheduleItem[] = [
-  { time: "06:00", activity: "Wake Up" },
-  { time: "07:00", activity: "Setup PC with Coffee" },
-  { time: "08:00", activity: "TypeScript" },
-  { time: "10:00", activity: "Break" },
-  { time: "11:00", activity: "Leetcode" },
-  { time: "12:00", activity: "Lunch" },
-  { time: "13:00", activity: "Review and Practice" },
-  { time: "14:00", activity: "Virtual Field Trip" },
-  { time: "15:00", activity: "Continue Studying TypeScript" },
+  { startTime: "06:00 AM", activity: "Wake Up" },
+  { startTime: "08:00 AM", endTime: "11:00 AM", activity: "Study TypeScript" },
+  { startTime: "12:00 PM", endTime: "01:00 PM", activity: "Lunch" },
+  { startTime: "13:00 PM", endTime: "15:00 PM", activity: "Review and Practice" },
+  { startTime: "15:00 PM", endTime: "17:00 PM", activity: "LeetCode" },
+  { startTime: "17:00 PM", endTime: "18:00 PM", activity: "Virtual Field Trip" },
+  { startTime: "19:00 PM", activity: "Continue Studying TypeScript" },
+  { startTime: "23:00 PM", endTime: "06:00 AM", activity: "Sleep" },
 ];
 
 const ClockSchedule: React.FC = () => {
@@ -32,14 +32,16 @@ const ClockSchedule: React.FC = () => {
 
   return (
     <div className="clock-schedule">
+      <div className='innerCircle'>
       <div className="clock-face">
+      <div className="inner-circle"></div>
         {Array.from({ length: 24 }).map((_, index) => (
           <div
             key={index}
             className="clock-hour"
-            style={calculateHourPosition(index)}
+            style={calculateHourPosition(index + 1)}
           >
-            {String(index).padStart(2, '0')}:00 
+            {index + 1} 
           </div>
         ))}
 
@@ -51,15 +53,18 @@ const ClockSchedule: React.FC = () => {
           />
         ))}
 
-        {scheduleData.map((item, index) => (
-          <div
-            key={index}
-            className="clock-activity"
-            style={calculatePosition(item.time)}
-          >
-            <span className="activity-label">{item.activity}</span>
-          </div>
-        ))}
+        {scheduleData.map((item, index) => {
+          const startPosition = calculatePosition(item.startTime);
+          return (
+            <div
+              key={index}
+              className="clock-activity"
+              style={startPosition}
+            >
+              <span className="activity-label">{item.activity}</span>
+            </div>
+          );
+        })}
         
         <div className="clock-hand hour-hand" style={calculateHourHand(currentTime)}></div>
         <div className="clock-hand minute-hand" style={calculateMinuteHand(currentTime)}></div>
@@ -69,6 +74,7 @@ const ClockSchedule: React.FC = () => {
       </div>
       <div className="current-time">
         {currentTime.toFormat('HH:mm:ss')} 
+      </div>
       </div>
     </div>
   );
@@ -90,20 +96,23 @@ function calculateHourPosition(hour: number) {
 
 function calculateLinePosition(hour: number) {
   const angle = (hour * 15) - 90; 
-  const x1 = 50 + 50 * Math.cos((angle * Math.PI) / 180);
-  const y1 = 50 + 50 * Math.sin((angle * Math.PI) / 180);
-  const x2 = 50 + 60 * Math.cos((angle * Math.PI) / 180);
-  const y2 = 50 + 60 * Math.sin((angle * Math.PI) / 180);
+  const x1 = 50 + 51.20 * Math.cos((angle * Math.PI) / 180); 
+  const y1 = 49 + 52 * Math.sin((angle * Math.PI) / 180); 
+
+  const lineLength = 20; 
+  const lineOffset = lineLength / 2; 
+  const x2 = 51 + (50 + lineOffset) * Math.cos((angle * Math.PI) / 180);
+  const y2 = 50 + (50 + lineOffset) * Math.sin((angle * Math.PI) / 180);
 
   return {
     position: 'absolute' as 'absolute',
     left: `${x1}%`,
     top: `${y1}%`,
     width: '2px',
-    height: '10px',
+    height: `${lineLength}px`,
     backgroundColor: '#333',
     transform: `rotate(${angle + 90}deg)`,
-    transformOrigin: 'top',
+    
   };
 }
 
@@ -113,13 +122,17 @@ function calculatePosition(time: string) {
   const minute = parseInt(minuteString);
   const angle = (hour * 15) + (minute * 0.25) - 90; 
 
-  const x = 50 + 40 * Math.cos((angle * Math.PI) / 180);
-  const y = 50 + 40 * Math.sin((angle * Math.PI) / 180);
+  const radius = 30; 
+  const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
+  const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
+
+  const adjustedAngle = angle >= 90 && angle <= 270 ? angle + 180 : angle;
 
   return {
     top: `${y}%`,
     left: `${x}%`,
-    transform: 'translate(-50%, -50%)',
+    transform: `translate(-50%, -50%) rotate(${adjustedAngle}deg)`,
+    transformOrigin: 'center',
   };
 }
 
@@ -127,10 +140,6 @@ function calculateHourHand(time: DateTime) {
   const hours = time.hour; 
   const minutes = time.minute; 
   const angle = (hours * 15) + (minutes * 0.25) - 360; 
-
-/*   (hrs + 15) + (mins * 0.25) - 720
-  (hrs + 15) + (mins * 0.25) - 90
- */
 
   return {
     transform: `rotate(${angle}deg)`,
@@ -157,13 +166,16 @@ function calculateMinuteHand(time: DateTime) {
 
 function calculateSecondHand(time: DateTime) {
   const seconds = time.second;
-  const angle = seconds * 6 - 360; 
-
+  const angle = seconds * 6; 
+  
   return {
     transform: `rotate(${angle}deg)`,
     position: 'absolute', 
     bottom: '50%', 
     left: '50%',
+    height: '40%',
+    width: '2px',  
+    backgroundColor: 'red', 
     transformOrigin: 'bottom center',
   };
 }
