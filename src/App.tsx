@@ -33,48 +33,48 @@ const ClockSchedule: React.FC = () => {
   return (
     <div className="clock-schedule">
       <div className='innerCircle'>
-      <div className="clock-face">
-      <div className="inner-circle"></div>
-        {Array.from({ length: 24 }).map((_, index) => (
-          <div
-            key={index}
-            className="clock-hour"
-            style={calculateHourPosition(index + 1)}
-          >
-            {index + 1} 
-          </div>
-        ))}
-
-        {Array.from({ length: 24 }).map((_, index) => (
-          <div
-            key={`line-${index}`}
-            className="clock-line"
-            style={calculateLinePosition(index)}
-          />
-        ))}
-
-        {scheduleData.map((item, index) => {
-          const startPosition = calculatePosition(item.startTime);
-          return (
+        <div className="clock-face">
+          <div className="inner-circle"></div>
+          {Array.from({ length: 24 }).map((_, index) => (
             <div
               key={index}
-              className="clock-activity"
-              style={startPosition}
+              className="clock-hour"
+              style={calculateHourPosition(index + 1)}
             >
-              <span className="activity-label">{item.activity}</span>
+              {index + 1} 
             </div>
-          );
-        })}
-        
-        <div className="clock-hand hour-hand" style={calculateHourHand(currentTime)}></div>
-        <div className="clock-hand minute-hand" style={calculateMinuteHand(currentTime)}></div>
-        <div className="second-hand" style={calculateSecondHand(currentTime)}></div>
-        
-        <div className="clock-center"></div>
-      </div>
-      <div className="current-time">
-        {currentTime.toFormat('HH:mm:ss')} 
-      </div>
+          ))}
+
+          {Array.from({ length: 24 }).map((_, index) => (
+            <div
+              key={`line-${index}`}
+              className="clock-line"
+              style={calculateLinePosition(index)}
+            />
+          ))}
+
+          {scheduleData.map((item, index) => {
+            const startPosition = calculatePosition(item.startTime);
+            return (
+              <div
+                key={index}
+                className="clock-activity"
+                style={startPosition}
+              >
+                <span className="activity-label">{item.activity}</span>
+              </div>
+            );
+          })}
+          
+          <div className="clock-hand hour-hand" style={calculateHourHand(currentTime)}></div>
+          <div className="clock-hand minute-hand" style={calculateMinuteHand(currentTime)}></div>
+          <div className="second-hand" style={calculateSecondHand(currentTime)}></div>
+          
+          <div className="clock-center"></div>
+        </div>
+        <div className="current-time">
+          {currentTime.toFormat('HH:mm:ss')} 
+        </div>
       </div>
     </div>
   );
@@ -89,9 +89,9 @@ function calculateHourPosition(hour: number) {
     top: `${y}%`,
     left: `${x}%`,
     transform: 'translate(-50%, -50%)',
-    position: 'absolute' as 'absolute',
+    position: 'absolute' as const,
     fontSize: '1rem',
-  };
+  } as React.CSSProperties; 
 }
 
 function calculateLinePosition(hour: number) {
@@ -105,15 +105,14 @@ function calculateLinePosition(hour: number) {
   const y2 = 50 + (50 + lineOffset) * Math.sin((angle * Math.PI) / 180);
 
   return {
-    position: 'absolute' as 'absolute',
+    position: 'absolute' as const,
     left: `${x1}%`,
     top: `${y1}%`,
     width: '2px',
     height: `${lineLength}px`,
     backgroundColor: '#333',
     transform: `rotate(${angle + 90}deg)`,
-    
-  };
+  } as React.CSSProperties; 
 }
 
 function calculatePosition(time: string) {
@@ -133,7 +132,7 @@ function calculatePosition(time: string) {
     left: `${x}%`,
     transform: `translate(-50%, -50%) rotate(${adjustedAngle}deg)`,
     transformOrigin: 'center',
-  };
+  } as React.CSSProperties; 
 }
 
 function calculateHourHand(time: DateTime) {
@@ -147,7 +146,7 @@ function calculateHourHand(time: DateTime) {
     bottom: '50%',
     left: '50%',
     transformOrigin: 'bottom center',
-  };
+  } as React.CSSProperties; 
 }
 
 function calculateMinuteHand(time: DateTime) {
@@ -161,7 +160,7 @@ function calculateMinuteHand(time: DateTime) {
     bottom: '50%',
     left: '50%',
     transformOrigin: 'bottom center',
-  };
+  } as React.CSSProperties; 
 }
 
 function calculateSecondHand(time: DateTime) {
@@ -177,7 +176,7 @@ function calculateSecondHand(time: DateTime) {
     width: '2px',  
     backgroundColor: 'red', 
     transformOrigin: 'bottom center',
-  };
+  } as React.CSSProperties; 
 }
 
 export default ClockSchedule;
