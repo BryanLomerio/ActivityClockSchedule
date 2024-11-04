@@ -4,9 +4,9 @@ import Dog from './assets/dog.gif';
 import './index.css';
 
 interface ScheduleItem {
-  startTime: string; 
-  endTime?: string; 
-  activity: string; 
+  startTime: string;
+  endTime?: string;
+  activity: string;
 }
 
 const scheduleData: ScheduleItem[] = [
@@ -42,7 +42,7 @@ const ClockSchedule: React.FC = () => {
               className="clock-hour"
               style={calculateHourPosition(index + 1)}
             >
-              {index + 1} 
+              {index + 1}
             </div>
           ))}
 
@@ -60,24 +60,31 @@ const ClockSchedule: React.FC = () => {
               <div
                 key={index}
                 className="clock-activity"
-                style={startPosition}
+                style={{
+                  ...startPosition,
+                  color: item.activity === "sleep" ? 'transparent' : 'inherit'
+                }}
               >
+                {item.activity !== "sleep" && (
                   <span className="activity-label">
-                  {item.activity === "sleep" ? <img src={Dog} alt="Dog sleeping" /> : item.activity}
-                </span>
+                    {item.activity}
+                  </span>
+                )}
+                {item.activity === "sleep" && <img className='dog' src={Dog} alt="Dog sleeping" />}
+
 
               </div>
             );
           })}
-          
+
           <div className="clock-hand hour-hand" style={calculateHourHand(currentTime)}></div>
           <div className="clock-hand minute-hand" style={calculateMinuteHand(currentTime)}></div>
           <div className="second-hand" style={calculateSecondHand(currentTime)}></div>
-          
+
           <div className="clock-center"></div>
         </div>
         <div className="current-time">
-          {currentTime.toFormat('HH:mm:ss')} 
+          {currentTime.toFormat('HH:mm:ss')}
         </div>
       </div>
     </div>
@@ -85,7 +92,7 @@ const ClockSchedule: React.FC = () => {
 };
 
 function calculateHourPosition(hour: number) {
-  const angle = (hour * 15) - 90; 
+  const angle = (hour * 15) - 90;
   const x = 50 + 60 * Math.cos((angle * Math.PI) / 180);
   const y = 50 + 60 * Math.sin((angle * Math.PI) / 180);
 
@@ -95,15 +102,15 @@ function calculateHourPosition(hour: number) {
     transform: 'translate(-50%, -50%)',
     position: 'absolute' as const,
     fontSize: '1rem',
-  } as React.CSSProperties; 
+  } as React.CSSProperties;
 }
 
 function calculateLinePosition(hour: number) {
-  const angle = (hour * 15) - 90; 
-  const x1 = 50 + 51.20 * Math.cos((angle * Math.PI) / 180); 
-  const y1 = 49 + 52 * Math.sin((angle * Math.PI) / 180); 
+  const angle = (hour * 15) - 90;
+  const x1 = 50 + 51.20 * Math.cos((angle * Math.PI) / 180);
+  const y1 = 49 + 52 * Math.sin((angle * Math.PI) / 180);
 
-  const lineLength = 20; 
+  const lineLength = 20;
   /* const lineOffset = lineLength / 2;  */
   // Remove x2 and y2 since they are not used
   // const x2 = 51 + (50 + lineOffset) * Math.cos((angle * Math.PI) / 180);
@@ -123,11 +130,11 @@ function calculateLinePosition(hour: number) {
 
 function calculatePosition(time: string) {
   const [hourString, minuteString] = time.split(":");
-  const hour = parseInt(hourString); 
+  const hour = parseInt(hourString);
   const minute = parseInt(minuteString);
-  const angle = (hour * 15) + (minute * 0.25) - 90; 
+  const angle = (hour * 15) + (minute * 0.25) - 90;
 
-  const radius = 30; 
+  const radius = 30;
   const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
   const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
 
@@ -138,55 +145,55 @@ function calculatePosition(time: string) {
     left: `${x}%`,
     transform: `translate(-50%, -50%) rotate(${adjustedAngle}deg)`,
     transformOrigin: 'center',
-  } as React.CSSProperties; 
+  } as React.CSSProperties;
 }
 
-function calculateHourHand(time:DateTime) {
+function calculateHourHand(time: DateTime) {
 
   const hours = time.hour;
   const minutes = time.minute;
   const angle = (hours * 15) + (minutes * 0.25) - 360;
 
-return {
-  transform: `rotate(${angle}deg)`,
-  position: 'absolute',
-  left: '50%',
-  transFormOrigin: 'bottom center'
+  return {
+    transform: `rotate(${angle}deg)`,
+    position: 'absolute',
+    left: '50%',
+    transFormOrigin: 'bottom center'
 
-}as React.CSSProperties;
+  } as React.CSSProperties;
 
 }
 
 
-function calculateMinuteHand(time: DateTime){
+function calculateMinuteHand(time: DateTime) {
   const minutes = time.minute;
   const seconds = time.second;
-const angle = (minutes * 6) + (seconds * 0.1) - 360;
+  const angle = (minutes * 6) + (seconds * 0.1) - 360;
 
 
-return{
-  transform: `rotate(${angle}deg)`,
-  position: `absolute`,
-  bottom: '50%',
-  left: '50%',
-  transformOrigin: 'bottom center'
-}as React.CSSProperties;
+  return {
+    transform: `rotate(${angle}deg)`,
+    position: `absolute`,
+    bottom: '50%',
+    left: '50%',
+    transformOrigin: 'bottom center'
+  } as React.CSSProperties;
 }
 
-function calculateSecondHand(time: DateTime){
+function calculateSecondHand(time: DateTime) {
 
   const seconds = time.second;
-const angle = seconds * 6;
+  const angle = seconds * 6;
 
-return{
-  transform: `rotate(${angle}deg)`,
-  position: `absolute`,
-  bottom: '50%',
-  left: '50%',
-  height:'50%',
-  width: '5px',
-  transformOrigin: 'bottom center'
-}as React.CSSProperties;
+  return {
+    transform: `rotate(${angle}deg)`,
+    position: `absolute`,
+    bottom: '50%',
+    left: '50%',
+    height: '50%',
+    width: '5px',
+    transformOrigin: 'bottom center'
+  } as React.CSSProperties;
 
 }
 

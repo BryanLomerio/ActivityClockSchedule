@@ -1,12 +1,13 @@
-*{
+* {
   font-family: "Barlow", sans-serif;
   font-weight: 100;
   font-style: normal;
 }
+
 .clock-schedule {
   display: grid;
-  place-items: center; 
-  height: 100vh; 
+  place-items: center;
+  height: 100vh;
 }
 
 .clock-face {
@@ -14,7 +15,7 @@
   width: 600px;
   height: 600px;
   border: 5px solid #333;
-  border-radius: 50%; 
+  border-radius: 50%;
   background-color: #fff;
 }
 
@@ -22,12 +23,12 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 20px; 
+  width: 20px;
   height: 20px;
   background-color: #333;
-  border-radius: 50%; 
+  border-radius: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1; 
+  z-index: 1;
 }
 
 .clock-hour {
@@ -35,7 +36,7 @@
   font-size: 1rem;
   font-weight: bold;
   text-align: center;
-  color: #333; 
+  color: #333;
 }
 
 .clock-minute-marker {
@@ -67,11 +68,13 @@
   height: 320px;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
+
 .minute-hand {
   width: 10px;
   height: 350px;
-  clip-path: polygon(50% 0%, 100% 100%, 0% 100%); 
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
+
 .current-time {
   margin-top: 80px;
   font-size: 1.5rem;
@@ -80,9 +83,9 @@
 
 
 .second-hand {
-  background-color: red; 
-  width: 2px; 
-  height: 40%; 
+  background-color: red;
+  width: 2px;
+  height: 40%;
   position: absolute;
   bottom: 50%;
   left: 50%;
@@ -91,16 +94,17 @@
 
 
 .activity-label {
-  max-width: 80px; 
+  max-width: 80px;
   text-align: center;
-  white-space: normal; 
-  word-break: break-word; 
-  font-size: 1rem; 
-  line-height: 1; 
-  margin-top: 5px; 
+  white-space: normal;
+  word-break: break-word;
+  font-size: 1rem;
+  line-height: 1;
+  margin-top: 5px;
   color: black;
   font-weight: bold;
 }
+
 .activity-segment {
   position: absolute;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
@@ -113,25 +117,32 @@
 }
 
 .clock-activity .activity-label {
-  background-color: lightblue; 
+  background-color: lightblue;
   padding: 4px;
   border-radius: 4px;
   margin-left: 10px
 }
 
 .clock-activity.end {
-  background-color: lightcoral; 
+  background-color: lightcoral;
 }
 
 .inner-circle {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 620px; 
-  height: 620px; 
-  background-color: #ffffff00; 
+  width: 620px;
+  height: 620px;
+  background-color: #ffffff00;
   border-radius: 50%;
-  border: 2px solid #333; 
+  border: 2px solid #333;
   transform: translate(-50%, -50%);
-  z-index: 2; 
+  z-index: 2;
+}
+
+.dog {
+  height: auto;
+  width: 300px;
+  transform: rotate(-70deg);
+  margin-right: 80px;
 }
