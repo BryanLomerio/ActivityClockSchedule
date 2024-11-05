@@ -119,15 +119,16 @@ h3 {
 
 
 .activity-label {
+  font-family: "Fredoka", serif !important;
   max-width: 80px;
   text-align: center;
   white-space: normal;
   word-break: break-word;
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 1;
   margin-top: 5px;
   color: black;
-  font-weight: bold;
+  font-weight: none;
 }
 
 .activity-segment {
