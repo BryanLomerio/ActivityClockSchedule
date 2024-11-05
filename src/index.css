@@ -46,7 +46,7 @@ h3 {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 0.70rem;
-  background-color: rgb(255, 204, 2);
+  background-color: rgb(0, 0, 0);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -76,7 +76,7 @@ h3 {
 
 .activity-label {
   font-size: 1rem !important;
-  color: #555;
+  color: #555555;
 }
 
 .clock-hand {
@@ -89,14 +89,14 @@ h3 {
 }
 
 .hour-hand {
-  width: 10px;
-  height: 260px;
+  width: 7px;
+  height: 200px;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
 
 .minute-hand {
-  width: 10px;
-  height: 350px;
+  width: 7px;
+  height: 280px;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
 
@@ -143,8 +143,8 @@ h3 {
 }
 
 .clock-activity .activity-label {
-  background-color: lightblue;
-  padding: 4px;
+  background-color: #e8e4c9ac;
+  padding: 3px;
   border-radius: 4px;
   margin-left: 10px
 }
@@ -169,6 +169,83 @@ h3 {
 .dog {
   height: auto;
   width: 300px;
-  transform: rotate(-70deg);
+  transform: rotate(-80deg);
   margin-right: 80px;
+
+}
+
+.legend {
+  position: absolute;
+  top: 200px;
+  right: 400px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.legend-time {
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.legend-activity {
+  margin-left: 20px;
+  font-size: 1.30rem;
+}
+
+.dot-line {
+  position: relative;
+  width: 20px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, transparent 50%, #333 50%, #333);
+  background-size: 10px 2px;
+  background-repeat: repeat-x;
+  margin: 0 8px;
+}
+
+
+.add-activity-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.add-activity-form input {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-activity-form button {
+  padding: 5px 10px;
+  background-color: #e8e4c9ac;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-activity-form button:hover {
+  background-color: #e4dcaaac;
+}
+
+.delete-button {
+  border: none;
+  background-color: none;
+  margin-left: 20px;
+  background: none;
+  cursor: pointer;
+
 }
