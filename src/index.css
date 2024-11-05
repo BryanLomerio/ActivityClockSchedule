@@ -1,7 +1,15 @@
 * {
-  font-family: "Barlow", sans-serif;
+  font-family: "Barlow", sans-serif !important;
   font-weight: 100;
   font-style: normal;
+}
+
+.headhead {
+  margin-bottom: -150px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .clock-schedule {
@@ -23,13 +31,17 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 20px;
-  height: 20px;
-  background-color: #333;
-  border-radius: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  font-size: 0.70rem;
+  background-color: rgb(255, 204, 2);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-content: center;
+  font-weight: bold;
+  text-align: center;
 }
+
 
 .clock-hour {
   position: absolute;
@@ -46,11 +58,11 @@
 .clock-activity {
   position: absolute;
   text-align: center;
-  font-weight: bold;
+
 }
 
 .activity-label {
-  font-size: 0.8rem;
+  font-size: 1rem !important;
   color: #555;
 }
 
@@ -64,8 +76,8 @@
 }
 
 .hour-hand {
-  width: 6px;
-  height: 320px;
+  width: 10px;
+  height: 260px;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
 

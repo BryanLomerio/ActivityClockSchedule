@@ -33,6 +33,9 @@ const ClockSchedule: React.FC = () => {
 
   return (
     <div className="clock-schedule">
+      {/*   <div className='headhead'><h1>Inspired by Bae Seok Ryu</h1>
+        <h2>TODAY'S TIME TABLE</h2>
+      </div> */}
       <div className='innerCircle'>
         <div className="clock-face">
           <div className="inner-circle"></div>
@@ -62,7 +65,7 @@ const ClockSchedule: React.FC = () => {
                 className="clock-activity"
                 style={{
                   ...startPosition,
-                  color: item.activity === "sleep" ? 'transparent' : 'inherit'
+                  color: item.activity === "sleep" ? 'transparent' : 'inherit',
                 }}
               >
                 {item.activity !== "sleep" && (
@@ -81,7 +84,7 @@ const ClockSchedule: React.FC = () => {
           <div className="clock-hand minute-hand" style={calculateMinuteHand(currentTime)}></div>
           <div className="second-hand" style={calculateSecondHand(currentTime)}></div>
 
-          <div className="clock-center"></div>
+          <div className="clock-center">START</div>
         </div>
         <div className="current-time">
           {currentTime.toFormat('HH:mm:ss')}
@@ -101,12 +104,12 @@ function calculateHourPosition(hour: number) {
     left: `${x}%`,
     transform: 'translate(-50%, -50%)',
     position: 'absolute' as const,
-    fontSize: '1rem',
+    fontSize: '1.50rem',
   } as React.CSSProperties;
 }
 
 function calculateLinePosition(hour: number) {
-  const angle = (hour * 15) - 90;
+  const angle = (hour * 15) - 360;
   const x1 = 50 + 51.20 * Math.cos((angle * Math.PI) / 180);
   const y1 = 49 + 52 * Math.sin((angle * Math.PI) / 180);
 
@@ -116,11 +119,13 @@ function calculateLinePosition(hour: number) {
   // const x2 = 51 + (50 + lineOffset) * Math.cos((angle * Math.PI) / 180);
   // const y2 = 50 + (50 + lineOffset) * Math.sin((angle * Math.PI) / 180);
 
+  const isAssignedHour = [0, 6, 12, 18, 24].includes(hour);
+
   return {
     position: 'absolute' as 'absolute',
     left: `${x1}%`,
     top: `${y1}%`,
-    width: '2px',
+    width: isAssignedHour ? '7px' : '3px',
     height: `${lineLength}px`,
     backgroundColor: '#333',
     transform: `rotate(${angle + 90}deg)`,
@@ -181,19 +186,19 @@ function calculateMinuteHand(time: DateTime) {
 }
 
 function calculateSecondHand(time: DateTime) {
-
   const seconds = time.second;
-  const angle = seconds * 6;
+  const angle = (seconds % 360) * 5;
 
   return {
     transform: `rotate(${angle}deg)`,
-    position: `absolute`,
+    position: 'absolute',
     bottom: '50%',
     left: '50%',
     height: '50%',
     width: '5px',
     transformOrigin: 'bottom center'
   } as React.CSSProperties;
+
 
 }
 
