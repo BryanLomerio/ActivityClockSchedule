@@ -4,12 +4,25 @@
   font-style: normal;
 }
 
+body {
+  background-color: #e8e4c9ac;
+}
+
+h1,
+h3 {
+  font-weight: bold;
+  line-height: 0.50;
+  font-family: "Fredoka", serif !important;
+
+}
+
 .headhead {
   margin-bottom: -150px;
   justify-content: center;
   display: flex;
   flex-direction: column;
   text-align: center;
+
 }
 
 .clock-schedule {

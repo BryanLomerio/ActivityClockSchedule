@@ -36,6 +36,12 @@ const ClockSchedule: React.FC = () => {
       {/*   <div className='headhead'><h1>Inspired by Bae Seok Ryu</h1>
         <h2>TODAY'S TIME TABLE</h2>
       </div> */}
+
+      <span className='headhead'>
+        <h1>Inspired by Bae Seok Ryu</h1>
+        <h3>TODAY'S TIME TABLE</h3>
+
+      </span>
       <div className='innerCircle'>
         <div className="clock-face">
           <div className="inner-circle"></div>
@@ -66,6 +72,7 @@ const ClockSchedule: React.FC = () => {
                 style={{
                   ...startPosition,
                   color: item.activity === "sleep" ? 'transparent' : 'inherit',
+                  backgroundColor: item.activity === "sleep" ? 'transparent' : 'inherit',
                 }}
               >
                 {item.activity !== "sleep" && (
