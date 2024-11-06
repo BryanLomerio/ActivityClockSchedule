@@ -66,6 +66,7 @@ h3 {
 
 .clock-minute-marker {
   position: absolute;
+
 }
 
 .clock-activity {
@@ -77,6 +78,7 @@ h3 {
 .activity-label {
   font-size: 1rem !important;
   color: #555555;
+  font-family: "Akshar", sans-serif;
 }
 
 .clock-hand {
@@ -89,21 +91,24 @@ h3 {
 }
 
 .hour-hand {
-  width: 7px;
+  width: 15px;
   height: 200px;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
 
 .minute-hand {
-  width: 7px;
+  width: 15px;
   height: 280px;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
 
 .current-time {
-  margin-top: 80px;
+  margin-top: 20px;
   font-size: 1.5rem;
   font-weight: bold;
+
+  padding: 0;
+  text-align: center;
 }
 
 
@@ -124,7 +129,7 @@ h3 {
   text-align: center;
   white-space: normal;
   word-break: break-word;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   line-height: 1;
   margin-top: 5px;
   color: black;
@@ -146,7 +151,9 @@ h3 {
   background-color: #e8e4c9ac;
   padding: 3px;
   border-radius: 4px;
-  margin-left: 10px
+  margin-left: 10px;
+  font-size: 1.10rem !important;
+  font-family: "Akshar", sans-serif !important;
 }
 
 .clock-activity.end {
@@ -191,6 +198,7 @@ h3 {
   align-items: center;
   position: relative;
   margin-bottom: 10px;
+  font-size: 1.20rem;
 }
 
 .legend-time {
@@ -200,7 +208,10 @@ h3 {
 
 .legend-activity {
   margin-left: 20px;
-  font-size: 1.30rem;
+  font-size: 1rem;
+  color: black;
+  font-weight: 400;
+  font-family: "Akshar", sans-serif;
 }
 
 .dot-line {
@@ -242,10 +253,27 @@ h3 {
 }
 
 .delete-button {
-  border: none;
+
   background-color: none;
   margin-left: 20px;
   background: none;
   cursor: pointer;
+  color: red;
+  border: 1px solid black;
 
+}
+
+
+.form-act::placeholder {
+  font-size: 1rem !important;
+  color: rgba(0, 0, 0, 0.34);
+  font-weight: 400;
+  font-family: "Akshar", sans-serif;
+
+}
+
+.add-act-form {
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Akshar", sans-serif;
 }

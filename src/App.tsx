@@ -110,10 +110,6 @@ const ClockSchedule: React.FC = () => {
 
           <div className="clock-center">START</div>
         </div>
-        <div className="current-time">
-          {currentTime.toFormat('HH:mm:ss')}
-        </div>
-
         <div className="legend">
           {scheduleData.map((item, index) => (
             <div key={index} className="legend-item">
@@ -127,6 +123,7 @@ const ClockSchedule: React.FC = () => {
           ))}
           <form onSubmit={handleAddActivity} className="add-activity-form">
             <input
+              className='form-act'
               type="text"
               placeholder="Activity"
               value={newActivity}
@@ -134,13 +131,17 @@ const ClockSchedule: React.FC = () => {
               required
             />
             <input
+              className='form-act'
               type="time"
               value={newTime}
               onChange={handleTimeChange}
               required
             />
-            <button type="submit">Add Activity</button>
+            <button className='add-act-form' type="submit">Add Activity</button>
           </form>
+          <div className="current-time">
+            {currentTime.toFormat('HH:mm:ss')}
+          </div>
         </div>
       </div>
     </div>
@@ -236,8 +237,8 @@ function calculateSecondHand(time: DateTime) {
     position: 'absolute',
     bottom: '50%',
     left: '50%',
-    height: '60%',
-    width: '2px',
+    height: '40%',
+    width: '5px',
     transformOrigin: 'bottom center',
   } as React.CSSProperties;
 }
