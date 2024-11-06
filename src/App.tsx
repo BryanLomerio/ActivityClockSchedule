@@ -58,6 +58,7 @@ const ClockSchedule: React.FC = () => {
   return (
     <div className="clock-schedule">
       <span className='headhead'>
+        <h1>배석류 백수계획표</h1>
         <h1>Inspired by Bae Seok Ryu</h1>
         <h3>TODAY'S TIME TABLE</h3>
       </span>
