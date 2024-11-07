@@ -101,6 +101,7 @@ const ClockSchedule: React.FC = () => {
                   </span>
                 )}
                 {item.activity === "sleep" && <img className='dog' src={Dog} alt="Dog sleeping" />}
+
               </div>
             );
           })}
@@ -181,6 +182,24 @@ function calculateLinePosition(hour: number) {
     transform: `rotate(${angle + 90}deg)`,
   };
 }
+
+/* function lineLabelStartEnd() {
+
+  const angle = (hour * 15) - 360;
+  const x1 = 50 + 51.20 * Math.cos((angle * Math.PI) / 180);
+  const y1 = 49 + 52 * Math.sin((angle * Math.PI) / 180);
+  const lineLengthLabel = 20;
+  const isAssignedHourLabel = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+
+  return {
+    position: `relative` as `relative`,
+    left: `${x1}`,
+    right: `${y1}`,
+    width: isAssignedHourLabel ? `20px` : `20px`,
+    height: `${lineLengthLabel}px`,
+    
+  }
+} */
 
 function calculatePosition(time: string) {
   const [hourString, minuteString] = time.split(":");
