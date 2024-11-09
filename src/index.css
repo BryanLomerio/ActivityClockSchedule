@@ -13,11 +13,12 @@ h3 {
   font-weight: bold;
   line-height: 0.50;
   font-family: "Fredoka", serif !important;
+  position: relative;
 
 }
 
 .headhead {
-  margin-bottom: -150px;
+  margin-bottom: 0;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -29,6 +30,7 @@ h3 {
   display: grid;
   place-items: center;
   height: 100vh;
+  padding-bottom: 100px;
 }
 
 .clock-face {
@@ -184,7 +186,7 @@ h3 {
 .legend {
   position: absolute;
   top: 200px;
-  right: 400px;
+  right: 100px;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 10px;
   border-radius: 8px;

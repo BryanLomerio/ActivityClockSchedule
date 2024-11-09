@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import Dog from './assets/dog.gif';
+import Draggable from 'react-draggable';
 import './index.css';
 
 interface ScheduleItem {
@@ -112,43 +113,48 @@ const ClockSchedule: React.FC = () => {
 
           <div className="clock-center">START</div>
         </div>
-        <div className="legend">
-          {scheduleData.map((item, index) => (
-            <div key={index} className="legend-item">
-              <span className="legend-time">
-                {item.startTime}{item.endTime ? ` - ${item.endTime}` : ''}
-              </span>
-              <span className="dot-line"></span>
-              <span className="legend-activity">{item.activity}</span>
-              <button className="delete-button" onClick={() => handleDeleteActivity(index)}>✘</button>
+        <Draggable>
+          <div className="legend">
+            {scheduleData.map((item, index) => (
+              <div key={index} className="legend-item">
+                <span className="legend-time">
+                  {item.startTime}{item.endTime ? ` - ${item.endTime}` : ''}
+                </span>
+                <span className="dot-line"></span>
+                <span className="legend-activity">{item.activity}</span>
+                <button className="delete-button" onClick={() => handleDeleteActivity(index)}>✘</button>
+              </div>
+            ))}
+            <form onSubmit={handleAddActivity} className="add-activity-form">
+              <input
+                className='form-act'
+                type="text"
+                placeholder="Activity"
+                value={newActivity}
+                onChange={handleActivityChange}
+                required
+              />
+              <input
+                className='form-act'
+                type="time"
+                value={newTime}
+                onChange={handleTimeChange}
+                required
+              />
+              <button className='add-act-form' type="submit">Add Activity</button>
+            </form>
+            <div className="current-time">
+              {currentTime.toFormat('hh:mm:ss a')}
             </div>
-          ))}
-          <form onSubmit={handleAddActivity} className="add-activity-form">
-            <input
-              className='form-act'
-              type="text"
-              placeholder="Activity"
-              value={newActivity}
-              onChange={handleActivityChange}
-              required
-            />
-            <input
-              className='form-act'
-              type="time"
-              value={newTime}
-              onChange={handleTimeChange}
-              required
-            />
-            <button className='add-act-form' type="submit">Add Activity</button>
-          </form>
-          <div className="current-time">
-            {currentTime.toFormat('HH:mm:ss')}
+
           </div>
-        </div>
+        </Draggable>
       </div>
     </div>
   );
 };
+
+
 
 function calculateHourPosition(hour: number) {
   const angle = (hour * 15) - 90;
