@@ -290,3 +290,127 @@ h3 {
   font-family: "Akshar", sans-serif;
 }
 
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .clock-face {
+    width: 300px;
+    height: 300px;
+  }
+
+  .clock-center {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hour-hand {
+    width: 10px;
+    height: 100px;
+  }
+
+  .minute-hand {
+    width: 10px;
+    height: 140px;
+  }
+
+  .second-hand {
+    width: 2px;
+    height: 20%;
+  }
+
+  .clock-hour {
+    font-size: 1rem;
+  }
+
+  .activity-label {
+    font-size: 0.8rem !important;
+    max-width: 60px;
+  }
+
+  .dog {
+    width: 150px;
+  }
+
+  .legend {
+    top: 150px;
+    right: 20px;
+    font-size: 0.8rem;
+  }
+
+  .legend-item {
+    font-size: 0.8rem;
+  }
+
+  .add-activity-form {
+    flex-direction: column;
+  }
+
+  .add-activity-form input {
+    margin-bottom: 10px;
+  }
+
+  .add-activity-form button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .clock-face {
+    width: 200px;
+    height: 200px;
+  }
+
+  .clock-center {
+    width: 30px;
+    height: 30px;
+  }
+
+  .hour-hand {
+    width: 8px;
+    height: 80px;
+  }
+
+  .minute-hand {
+    width: 8px;
+    height: 120px;
+  }
+
+  .second-hand {
+    width: 2px;
+    height: 15%;
+  }
+
+  .clock-hour {
+    font-size: 0.8rem;
+  }
+
+  .activity-label {
+    font-size: 0.6rem !important;
+    max-width: 50px;
+  }
+
+  .dog {
+    width: 100px;
+  }
+
+  .legend {
+    top: 100px;
+    right: 10px;
+    font-size: 0.6rem;
+  }
+
+  .legend-item {
+    font-size: 0.6rem;
+  }
+
+  .add-activity-form {
+    flex-direction: column;
+  }
+
+  .add-activity-form input {
+    margin-bottom: 5px;
+  }
+
+  .add-activity-form button {
+    width: 100%;
+  }
+}
