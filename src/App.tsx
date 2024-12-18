@@ -102,7 +102,6 @@ const ClockSchedule: React.FC = () => {
                   </span>
                 )}
                 {item.activity === "sleep" && <img className='dog' src={Dog} alt="Dog sleeping" />}
-
               </div>
             );
           })}
@@ -146,15 +145,12 @@ const ClockSchedule: React.FC = () => {
             <div className="current-time">
               {currentTime.toFormat('hh:mm:ss a')}
             </div>
-
           </div>
         </Draggable>
       </div>
     </div>
   );
 };
-
-
 
 function calculateHourPosition(hour: number) {
   const angle = (hour * 15) - 90;
@@ -167,7 +163,7 @@ function calculateHourPosition(hour: number) {
     transform: 'translate(-50%, -50%)',
     position: 'absolute' as const,
     fontSize: '1.50rem',
-  } as React.CSSProperties;
+  };
 }
 
 function calculateLinePosition(hour: number) {
@@ -179,7 +175,7 @@ function calculateLinePosition(hour: number) {
   const isAssignedHour = [0, 6, 12, 18, 24].includes(hour);
 
   return {
-    position: 'absolute' as 'absolute',
+    position: 'absolute' as const,
     left: `${x1}%`,
     top: `${y1}%`,
     width: isAssignedHour ? '7px' : '3px',
@@ -188,24 +184,6 @@ function calculateLinePosition(hour: number) {
     transform: `rotate(${angle + 90}deg)`,
   };
 }
-
-/* function lineLabelStartEnd() {
-
-  const angle = (hour * 15) - 360;
-  const x1 = 50 + 51.20 * Math.cos((angle * Math.PI) / 180);
-  const y1 = 49 + 52 * Math.sin((angle * Math.PI) / 180);
-  const lineLengthLabel = 20;
-  const isAssignedHourLabel = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-
-  return {
-    position: `relative` as `relative`,
-    left: `${x1}`,
-    right: `${y1}`,
-    width: isAssignedHourLabel ? `20px` : `20px`,
-    height: `${lineLengthLabel}px`,
-    
-  }
-} */
 
 function calculatePosition(time: string) {
   const [hourString, minuteString] = time.split(":");
@@ -224,7 +202,7 @@ function calculatePosition(time: string) {
     left: `${x}%`,
     transform: `translate(-50%, -50%) rotate(${adjustedAngle}deg)`,
     transformOrigin: 'center',
-  } as React.CSSProperties;
+  };
 }
 
 function calculateHourHand(time: DateTime) {
@@ -234,10 +212,10 @@ function calculateHourHand(time: DateTime) {
 
   return {
     transform: `rotate(${angle}deg)`,
-    position: 'absolute',
-    left: '50%',
-    transformOrigin: 'bottom center',
-  } as React.CSSProperties;
+    position: "absolute" as const,
+    left: "50%",
+    transformOrigin: "bottom center",
+  };
 }
 
 function calculateMinuteHand(time: DateTime) {
@@ -247,11 +225,11 @@ function calculateMinuteHand(time: DateTime) {
 
   return {
     transform: `rotate(${angle}deg)`,
-    position: `absolute`,
-    bottom: '50%',
-    left: '50%',
-    transformOrigin: 'bottom center',
-  } as React.CSSProperties;
+    position: "absolute" as const,
+    bottom: "50%",
+    left: "50%",
+    transformOrigin: "bottom center",
+  };
 }
 
 function calculateSecondHand(time: DateTime) {
@@ -260,13 +238,13 @@ function calculateSecondHand(time: DateTime) {
 
   return {
     transform: `rotate(${angle}deg)`,
-    position: 'absolute',
-    bottom: '50%',
-    left: '50%',
-    height: '40%',
-    width: '5px',
-    transformOrigin: 'bottom center',
-  } as React.CSSProperties;
+    position: "absolute" as const,
+    bottom: "50%",
+    left: "50%",
+    height: "40%",
+    width: "5px",
+    transformOrigin: "bottom center",
+  };
 }
 
 export default ClockSchedule;
