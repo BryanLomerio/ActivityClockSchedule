@@ -152,6 +152,7 @@ const ClockSchedule: React.FC = () => {
   );
 };
 
+//Hr
 function calculateHourPosition(hour: number) {
   const angle = (hour * 15) - 90;
   const x = 50 + 60 * Math.cos((angle * Math.PI) / 180);
