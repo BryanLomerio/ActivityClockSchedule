@@ -9,7 +9,7 @@ interface ScheduleItem {
   startTime: string;
   endTime?: string;
   activity: string;
-  color: string; 
+  color: string;
 }
 
 const initialScheduleData: ScheduleItem[] = [
@@ -27,8 +27,9 @@ const ClockSchedule: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(DateTime.now().setZone('Asia/Manila'));
   const [scheduleData, setScheduleData] = useState<ScheduleItem[]>(initialScheduleData);
   const [newActivity, setNewActivity] = useState<string>('');
-  const [newTime, setNewTime] = useState<string>('');
-  const [newColor, setNewColor] = useState<string>('#FFFFFF'); 
+  const [newStartTime, setNewStartTime] = useState<string>('');
+  const [newEndTime, setNewEndTime] = useState<string>('');
+  const [newColor, setNewColor] = useState<string>('#FFFFFF');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -58,8 +59,12 @@ const ClockSchedule: React.FC = () => {
     setNewActivity(e.target.value);
   };
 
-  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewTime(e.target.value);
+  const handleStartTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewStartTime(e.target.value);
+  };
+
+  const handleEndTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewEndTime(e.target.value);
   };
 
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,14 +73,15 @@ const ClockSchedule: React.FC = () => {
 
   const handleAddActivity = (e: React.FormEvent) => {
     e.preventDefault();
-    if (newActivity && newTime) {
+    if (newActivity && newStartTime) {
       setScheduleData(prevData => [
         ...prevData,
-        { startTime: newTime, activity: newActivity, color: newColor }
+        { startTime: newStartTime, endTime: newEndTime, activity: newActivity, color: newColor }
       ]);
       setNewActivity('');
-      setNewTime('');
-      setNewColor('#FFFFFF'); 
+      setNewStartTime('');
+      setNewEndTime('');
+      setNewColor('#FFFFFF');
     }
   };
 
@@ -120,7 +126,7 @@ const ClockSchedule: React.FC = () => {
                 style={{
                   ...startPosition,
                   color: item.activity === "sleep" ? 'transparent' : 'inherit',
-                  backgroundColor: item.activity === "sleep" ? 'transparent' : item.color, // Use the color
+                  backgroundColor: item.activity === "sleep" ? 'transparent' : item.color,
                 }}
               >
                 {item.activity !== "sleep" && (
@@ -140,56 +146,64 @@ const ClockSchedule: React.FC = () => {
           <div className="clock-center">START</div>
         </div>
         <Draggable>
-  <div className="legend" style={{ cursor: 'move' }}>
-    {scheduleData.map((item, index) => (
-      <div key={index} className="legend-item">
-        <span className="legend-time">
-          {item.startTime}{item.endTime ? ` - ${item.endTime}` : ''}
-        </span>
-        <span className="dot-line"></span>
-        <span 
-          className="legend-activity" 
-          style={{ backgroundColor: item.color }} 
-        >
-          {item.activity}
-        </span>
-        <button className="delete-button" onClick={() => handleDeleteActivity(index)}>✘</button>
-      </div>
-    ))}
-    <form onSubmit={handleAddActivity} className="add-activity-form">
-      <input
-        className='form-act'
-        type="text"
-        placeholder="Activity"
-        value={newActivity}
-        onChange={handleActivityChange}
-        required
-      />
-      <input
-        className='form-act'
-        type="time"
-        value={newTime}
-        onChange={handleTimeChange}
-        required
-      />
-      <input
-        className='form-act'
-        type="color"
-        value={newColor} 
-        onChange={handleColorChange}
-      />
-      <button className='add-act-form' type="submit">Add Activity</button>
-    </form>
-    <div className="current-time">
-      {currentTime.toFormat('hh:mm:ss a')}
-    </div>
-  </div>
-</Draggable>
+          <div className="legend" style={{ cursor: 'move' }}>
+            {scheduleData.map((item, index) => (
+              <div key={index} className="legend-item">
+                <span className="legend-time">
+                  {item.startTime}{item.endTime ? ` - ${item.endTime}` : ''}
+                </span>
+                <span className="dot-line"></span>
+                <span 
+                  className="legend-activity" 
+                  style={{ backgroundColor: item.color }} 
+                >
+                  {item.activity}
+                </span>
+                <button className="delete-button" onClick={() => handleDeleteActivity(index)}>✘</button>
+              </div>
+            ))}
+            <form onSubmit={handleAddActivity} className="add-activity-form">
+              <input
+                className='form-act'
+                type="text"
+                placeholder="Activity"
+                value={newActivity}
+                onChange={handleActivityChange}
+                required
+              />
+              <input
+                className='form-act'
+                type="time"
+                value={newStartTime}
+                onChange={handleStartTimeChange}
+                required
+              />
+              <input
+                className='form-act'
+                type="time"
+                value={newEndTime}
+                onChange={handleEndTimeChange}
+              />
+            <input
+  className="form-act color-input"
+  type="color"
+  value={newColor}
+  onChange={handleColorChange}
+  placeholder="Color"
+/>
 
+              <button className='add-act-form' type="submit">Add Activity</button>
+            </form>
+            <div className="current-time">
+              {currentTime.toFormat('hh:mm:ss a')}
+            </div>
+          </div>
+        </Draggable>
       </div>
     </div>
   );
 };
+
 function calculateHourPosition(hour: number) {
   const angle = (hour * 15) - 90;
   const x = 50 + 60 * Math.cos((angle * Math.PI) / 180);

@@ -414,3 +414,18 @@ h3 {
     width: 100%;
   }
 }
+
+
+.form-act.color-input {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; 
+  border: 2px solid #ccc; 
+  padding: 0;
+  background: none;
+  cursor: pointer; 
+}
+
+.form-act.color-input::-webkit-color-swatch {
+  border-radius: 50%;
+}
