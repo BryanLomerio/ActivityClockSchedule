@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Swal from 'sweetalert2'; 
+import Swal from 'sweetalert2';
 import { DateTime } from 'luxon';
 import Dog from './assets/dog.gif';
 import Draggable from 'react-draggable';
@@ -9,17 +9,18 @@ interface ScheduleItem {
   startTime: string;
   endTime?: string;
   activity: string;
+  color: string; 
 }
 
 const initialScheduleData: ScheduleItem[] = [
-  { startTime: "06:00 AM", activity: "Wake Up" },
-  { startTime: "08:00 AM", endTime: "18:00 PM", activity: "Work" },
-  { startTime: "12:00 PM", endTime: "01:00 PM", activity: "Lunch" },
-  { startTime: "18:00 PM", activity: "Time to Head Home" },
-  { startTime: "19:00 PM", activity: "Eat Dinner" },
-  { startTime: "20:00 PM", activity: "Study TypeScript" },
-  { startTime: "22:00 PM", activity: "Enhance Project Features" },
-  { startTime: "24:00 PM", endTime: "06:00 AM", activity: "sleep" },
+  { startTime: "06:00 AM", activity: "Wake Up", color: "#FFB6C1" },
+  { startTime: "08:00 AM", endTime: "18:00 PM", activity: "Work", color: "#ADD8E6" },
+  { startTime: "12:00 PM", endTime: "01:00 PM", activity: "Lunch", color: "#90EE90" },
+  { startTime: "18:00 PM", activity: "Time to Head Home", color: "#FFD700" },
+  { startTime: "19:00 PM", activity: "Eat Dinner", color: "#FF6347" },
+  { startTime: "20:00 PM", activity: "Study TypeScript", color: "#DA70D6" },
+  { startTime: "22:00 PM", activity: "Enhance Project Features", color: "#FF8C00" },
+  { startTime: "24:00 PM", endTime: "06:00 AM", activity: "sleep", color: "#B0C4DE" },
 ];
 
 const ClockSchedule: React.FC = () => {
@@ -27,6 +28,7 @@ const ClockSchedule: React.FC = () => {
   const [scheduleData, setScheduleData] = useState<ScheduleItem[]>(initialScheduleData);
   const [newActivity, setNewActivity] = useState<string>('');
   const [newTime, setNewTime] = useState<string>('');
+  const [newColor, setNewColor] = useState<string>('#FFFFFF'); 
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -51,7 +53,7 @@ const ClockSchedule: React.FC = () => {
       confirmButtonText: '<span style="font-size: 1rem; font-weight: bold;">Got it!</span>',
     });
   }, []);
-  
+
   const handleActivityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewActivity(e.target.value);
   };
@@ -60,12 +62,20 @@ const ClockSchedule: React.FC = () => {
     setNewTime(e.target.value);
   };
 
+  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewColor(e.target.value);
+  };
+
   const handleAddActivity = (e: React.FormEvent) => {
     e.preventDefault();
     if (newActivity && newTime) {
-      setScheduleData(prevData => [...prevData, { startTime: newTime, activity: newActivity }]);
+      setScheduleData(prevData => [
+        ...prevData,
+        { startTime: newTime, activity: newActivity, color: newColor }
+      ]);
       setNewActivity('');
       setNewTime('');
+      setNewColor('#FFFFFF'); 
     }
   };
 
@@ -110,7 +120,7 @@ const ClockSchedule: React.FC = () => {
                 style={{
                   ...startPosition,
                   color: item.activity === "sleep" ? 'transparent' : 'inherit',
-                  backgroundColor: item.activity === "sleep" ? 'transparent' : 'inherit',
+                  backgroundColor: item.activity === "sleep" ? 'transparent' : item.color, // Use the color
                 }}
               >
                 {item.activity !== "sleep" && (
@@ -130,45 +140,56 @@ const ClockSchedule: React.FC = () => {
           <div className="clock-center">START</div>
         </div>
         <Draggable>
-          <div className="legend" style={{ cursor: 'move' }}>
-            {scheduleData.map((item, index) => (
-              <div key={index} className="legend-item">
-                <span className="legend-time">
-                  {item.startTime}{item.endTime ? ` - ${item.endTime}` : ''}
-                </span>
-                <span className="dot-line"></span>
-                <span className="legend-activity">{item.activity}</span>
-                <button className="delete-button" onClick={() => handleDeleteActivity(index)}>✘</button>
-              </div>
-            ))}
-            <form onSubmit={handleAddActivity} className="add-activity-form">
-              <input
-                className='form-act'
-                type="text"
-                placeholder="Activity"
-                value={newActivity}
-                onChange={handleActivityChange}
-                required
-              />
-              <input
-                className='form-act'
-                type="time"
-                value={newTime}
-                onChange={handleTimeChange}
-                required
-              />
-              <button className='add-act-form' type="submit">Add Activity</button>
-            </form>
-            <div className="current-time">
-              {currentTime.toFormat('hh:mm:ss a')}
-            </div>
-          </div>
-        </Draggable>
+  <div className="legend" style={{ cursor: 'move' }}>
+    {scheduleData.map((item, index) => (
+      <div key={index} className="legend-item">
+        <span className="legend-time">
+          {item.startTime}{item.endTime ? ` - ${item.endTime}` : ''}
+        </span>
+        <span className="dot-line"></span>
+        <span 
+          className="legend-activity" 
+          style={{ backgroundColor: item.color }} 
+        >
+          {item.activity}
+        </span>
+        <button className="delete-button" onClick={() => handleDeleteActivity(index)}>✘</button>
+      </div>
+    ))}
+    <form onSubmit={handleAddActivity} className="add-activity-form">
+      <input
+        className='form-act'
+        type="text"
+        placeholder="Activity"
+        value={newActivity}
+        onChange={handleActivityChange}
+        required
+      />
+      <input
+        className='form-act'
+        type="time"
+        value={newTime}
+        onChange={handleTimeChange}
+        required
+      />
+      <input
+        className='form-act'
+        type="color"
+        value={newColor} 
+        onChange={handleColorChange}
+      />
+      <button className='add-act-form' type="submit">Add Activity</button>
+    </form>
+    <div className="current-time">
+      {currentTime.toFormat('hh:mm:ss a')}
+    </div>
+  </div>
+</Draggable>
+
       </div>
     </div>
   );
 };
-
 function calculateHourPosition(hour: number) {
   const angle = (hour * 15) - 90;
   const x = 50 + 60 * Math.cos((angle * Math.PI) / 180);
