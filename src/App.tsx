@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2'; 
 import { DateTime } from 'luxon';
 import Dog from './assets/dog.gif';
 import Draggable from 'react-draggable';
@@ -35,6 +36,22 @@ const ClockSchedule: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    Swal.fire({
+      title: '<span style="font-size: 1.5rem; font-weight: bold; color: black;">Welcome!</span>',
+      html: `
+        <p style="font-size: 1.2rem; font-weight: bold; color: black;">
+          For the best experience, zoom out your screen using 
+          <kbd style="padding: 0.2rem 0.4rem; border: 1px solid #ccc; border-radius: 3px; background-color: #f7f7f7; font-size: 1rem; font-weight: bold; color: black;">Ctrl</kbd> 
+          + 
+          <kbd style="padding: 0.2rem 0.4rem; border: 1px solid #ccc; border-radius: 3px; background-color: #f7f7f7; font-size: 1rem; font-weight: bold; color: black; margin-top: 10px;">-</kbd>
+        </p>
+      `,
+      icon: 'info',
+      confirmButtonText: '<span style="font-size: 1rem; font-weight: bold;">Got it!</span>',
+    });
+  }, []);
+  
   const handleActivityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewActivity(e.target.value);
   };
