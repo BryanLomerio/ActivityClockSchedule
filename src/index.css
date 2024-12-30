@@ -6,17 +6,11 @@
 
 body {
   background-color: #e8e4c9ac;
-  overflow: hidden;
   margin: 0;
   padding: 0;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .container {
-  overflow: visible; 
   min-height: 100vh;
 }
 
@@ -441,3 +435,5 @@ h3 {
 .form-act.color-input::-webkit-color-swatch {
   border-radius: 50%;
 }
+
+
