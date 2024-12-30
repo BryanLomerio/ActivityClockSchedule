@@ -130,7 +130,7 @@ const ClockSchedule: React.FC = () => {
           <div className="clock-center">START</div>
         </div>
         <Draggable>
-          <div className="legend">
+          <div className="legend" style={{ cursor: 'move' }}>
             {scheduleData.map((item, index) => (
               <div key={index} className="legend-item">
                 <span className="legend-time">
