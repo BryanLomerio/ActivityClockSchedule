@@ -157,7 +157,7 @@ h3 {
 
 .clock-activity .activity-label {
   background-color: #e8e4c9ac;
-  padding: 1px !important; 
+  padding: 1px !important;
   border-radius: 4px;
   margin-left: 10px;
   font-size: 1.10rem !important;
@@ -425,15 +425,13 @@ h3 {
 .form-act.color-input {
   width: 30px;
   height: 30px;
-  border-radius: 50%; 
-  border: 2px solid #ccc; 
+  border-radius: 50%;
+  border: 2px solid #ccc;
   padding: 0;
   background: none;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .form-act.color-input::-webkit-color-swatch {
   border-radius: 50%;
 }
-
-
